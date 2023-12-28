@@ -222,3 +222,14 @@
   background-color: transparent;
 }
 
+.category-head{
+  /* text-transform:uppercase; */
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px ; 
+}
+
+.category-title{
+  /* text-transform:uppercase; */
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px ; 
+}

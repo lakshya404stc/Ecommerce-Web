@@ -19,7 +19,7 @@ const productmodel = mongoose.Schema({
         required:true
     },
     photo:{
-        type:Buffer,
+        data:Buffer,
         contentType:String
     },
     category:{
@@ -28,6 +28,10 @@ const productmodel = mongoose.Schema({
         required:true
     },shipping:{
         type:Boolean
+    },
+    slug:{
+        type:String,
+        required:true
     }
 },{timestamps:true}) 
 

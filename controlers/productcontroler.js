@@ -5,26 +5,27 @@ const fs = require("fs")
 const productcontroler = {
     createproduct:async(req,res)=>{
         try {
-            const {name,description,quantity,price, category,shipping} = req.fields
-            const {photo} = req.files
-    
-            if(!name||!description||!quantity||!price||!category||!shipping){
-                return res.status(500).send({success:"false",messege:"one of the required fields is missing"})
+            const {name,description,price,quantity,category,shipping} = await req.fields
+            const {photo} = await req.files
+
+            if(!name||!description||!price||!quantity||!category||!shipping){
+                return res.status(500).send({success:"false",messege:"one of the required field is missing"})
             }
-            if(!photo&&photo.size>10000){
-                return res.status(500).send({success:"true",messege:"photo is required and should be less than 10 mb"})
+            if(!photo ){
+                return res.status(500).send({success:"false",messege:"photo is required and should be less than 10 mb"})
             }
-    
-            const newproduct = new productmodel({...req.fields,slug:slugify(name)})
+
+            const product = new productmodel({...req.fields,slug:slugify(name)})
             if(photo){
-                newproduct.photo.data = fs.readFileSync(photo.path)
-                newproduct.photo.contentType = photo.type
+                product.photo.data= fs.readFileSync(photo.path)
+                product.photoContentType = photo.type
             }
-            await newproduct.save()
-            res.status(200).send({success:"true",messege:"product created successfully",newproduct})
+            await product.save()
+            res.status(200).send({success:"true",messege:"product created successfully"})
+
         } catch (error) {
             console.log(error)
-            res.status(400).send({success:"false",messege:"error creating the product"})
+            res.status(400).send({success:"false",messege:"something went wrong"})
         }
     },
     getproductscontroler:async(req,res)=>{

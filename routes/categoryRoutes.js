@@ -6,7 +6,7 @@ const routes = express.Router()
 
 routes.post("/create-category",authMiddlewares.verifyToken,authMiddlewares.isAdmin,categorycontroler.createcategorycontroler)
 
-routes.put("/update-category/:id",authMiddlewares.verifyToken,authMiddlewares.isAdmin,categorycontroler.updatecategorycontroler)
+routes.put("/update-category/:id",categorycontroler.updatecategorycontroler)
 
 routes.get("/getcategory",categorycontroler.getcategorycontroler)
 

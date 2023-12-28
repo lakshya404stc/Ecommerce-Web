@@ -22,7 +22,7 @@ const Spinner = ({path = "login"}) => {
 
   return (
     <Layout>
-    <div class="d-flex flex-column align-items-center justify-content-center" style={{height:"80vh"}}>
+    <div className="d-flex flex-column align-items-center justify-content-center" style={{height:"80vh"}}>
       <div className="spinner-grow" style={{ width: '3rem', height: '3rem' }} role="status">
       </div>
       <h4 className="pnf-heading pt-5 ">login required </h4>

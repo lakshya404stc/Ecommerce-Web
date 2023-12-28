@@ -8,7 +8,7 @@ const categorycontroler = {
             if(!name){
                 return res.status(500).send({success:"false",messege:"required field is missing"})
             }
-            const category = categorymodel.findOne({name})
+            const category = await categorymodel.findOne({name})
             if(category){
                 return res.status(500).send({success:"false",messege:"this product already exist"})
             }
@@ -34,7 +34,7 @@ const categorycontroler = {
         try {
             const categories = await categorymodel.find({})
             if(!categories){
-                return res.status(200).send({success:"false",messege:"no categories found"})
+                return res.status(200).send({success:"false"})
             }
             res.status(200).send({success:"true",categories})
         } catch (error) {
@@ -55,7 +55,13 @@ const categorycontroler = {
     deletecategorycontroler:async(req,res)=>{
         try {
             const{id} = req.params
-            const category = categorymodel.findByIdAndDelete(id)
+            const category = await categorymodel.findByIdAndDelete(id)
+            if(category){
+                return res.status(200).send({success:"true",messege:"category deleted successfully"})
+            }
+            else{
+                return res.status(400).send({success:"false",messege:"error deleting the category"})
+            }
         } catch (error) {
             console.log(error)
             res.status(400).send({status:"false",messege:"error deleting the category"})

@@ -4,7 +4,7 @@ const productcontroler = require("../controlers/productcontroler")
 const authMiddleware = require("../middlewares/authMiddlewares")
 const formidable = require("express-formidable")
 
-routes.post("/create-product",authMiddleware.verifyToken,authMiddleware.isAdmin, formidable() ,productcontroler.createproduct)
+routes.post("/create-product",formidable() ,productcontroler.createproduct)
 
 routes.get("/get-products",productcontroler.getproductscontroler)
 
